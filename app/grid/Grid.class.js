@@ -6,12 +6,16 @@ export default class Grid {
     constructor() {
         generateQueryConstructor.call( this, ...arguments )
     }
+    get svgElement() {
+        return document.querySelector( this.settings.svgSelector )
+    }
     get gridElement() {
         return document.querySelector( this.settings.gridSelector )
     }
     build() {
         this.#buildGridLayout()
         this.#buildGridCells()
+        this.#buildGridSvg()
     }
     #buildGridLayout() {
         const { settings, gridElement } = this
@@ -34,10 +38,7 @@ export default class Grid {
             height: `${ this.gridHeight }px`,
             
             marginLeft: `${ this.gridMarginX }px`,
-            marginRight: `${ this.gridMarginX }px`,
             marginTop: `${ this.gridMarginY }px`,
-            marginBottom: `${ this.gridMarginY }px`,
-        
             border: `${ borderSize }px solid ${ borderColor }`
         })
     }
@@ -54,6 +55,18 @@ export default class Grid {
                 this.gridcells[ gridcell.position ] = gridcell 
             }
         }
+    }
+    #buildGridSvg() {
+        const { svgElement, gridWidth, gridHeight } = this
+        
+        Object.assign( svgElement.style, {
+            width: gridWidth,
+            height: gridHeight,
+            left: `${ this.gridMarginX }px`,
+            top: `${ this.gridMarginY }px`,
+        })
+
+        svgElement.setAttribute( 'viewbox', `0 0 ${ gridWidth } ${ gridHeight }`)
     }
 
     draw() {

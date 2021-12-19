@@ -42,7 +42,11 @@ export default class GridPathFinding {
         const outColRow = this.generateColRow( this.outPosition ) 
         const inColRow = this.generateColRow( this.inPosition ) 
         
-        const helperPath = (new AStarFinder()).findPath(
+        const aStarFinderConfig = {
+            weight: this.grid.settings.verticesWeight || 1
+        }
+
+        const helperPath = (new AStarFinder( aStarFinderConfig )).findPath(
             ...outColRow,
             ...inColRow,
             pathFindingGrid 
@@ -51,3 +55,6 @@ export default class GridPathFinding {
         return helperPath
     }
 }
+
+// https://github.com/qiao/PathFinding.js/
+// https://qiao.github.io/PathFinding.js/visual/
