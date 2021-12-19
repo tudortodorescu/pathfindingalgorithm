@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: black;
+}
+.gridcell {
+    float: left;
+}
+.gridcell.blocked {
+    background: gray;
+}
+.gridcell.out-cell {
+    background-color: lightgreen;
+}
+.gridcell.in-cell {
+    background-color: coral;
+}
