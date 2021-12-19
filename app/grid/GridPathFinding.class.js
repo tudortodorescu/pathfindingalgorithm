@@ -1,6 +1,6 @@
 import { generateQueryConstructor } from '../utils/object.utils.js'
-import AStarFinder from '../../lib/pathfinding/AStarFinder.js'
-import PathFindingGrid from '../../lib/pathfinding/Grid.js'
+import AStarFinder from '../lib/pathfinding/AStarFinder.js'
+import PathFindingGrid from '../lib/pathfinding/Grid.js'
 
 export default class GridPathFinding {
     constructor() {
