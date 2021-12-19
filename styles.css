@@ -3,6 +3,7 @@ body {
     overflow: hidden;
     background-color: black;
 }
+
 .gridcell {
     float: left;
 }
@@ -15,6 +16,8 @@ body {
 .gridcell.in-cell {
     background-color: coral;
 }
+
+/****/
 
 svg {
     position: fixed;
