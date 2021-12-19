@@ -8,3 +8,4 @@ const grid = new Grid({ settings: {
 }})
 
 grid.build()
+grid.draw()

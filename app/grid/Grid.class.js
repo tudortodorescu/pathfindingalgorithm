@@ -1,5 +1,6 @@
 import { generateQueryConstructor } from '../utils/object.utils.js'
 import GridCell from './GridCell.class.js'
+import GridDraw from './GridDraw.class.js'
 
 export default class Grid {
     constructor() {
@@ -53,5 +54,10 @@ export default class Grid {
                 this.gridcells[ gridcell.position ] = gridcell 
             }
         }
+    }
+
+    draw() {
+        const gridDraw = new GridDraw({ grid: this })
+        gridDraw.draw()
     }
 }

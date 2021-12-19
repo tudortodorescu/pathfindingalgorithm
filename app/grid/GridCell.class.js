@@ -114,6 +114,7 @@ export default class GridCell {
             this.renderOutInCells()
 
             grid.draggedGridcell.resetCell()
+            grid.draw()
         })
 
         function dontAllowDrag() {
