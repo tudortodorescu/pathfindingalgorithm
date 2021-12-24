@@ -21,7 +21,7 @@ export default {
    * @return {number} sqrt(dx * dx + dy * dy)
    */
   euclidean: function(dx, dy) {
-      return Math.sqrt(dx * dx + dy * dy);
+      return Math.sqrt(dx**2 + dy**2);
   },
 
   /**

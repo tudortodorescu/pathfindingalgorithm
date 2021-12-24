@@ -1,7 +1,7 @@
 import { generateQueryConstructor } from '../utils/object.utils.js'
 import GridPathFinding from './GridPathFinding.class.js'
 
-export default class GridDraw {
+class GridDraw {
     constructor() {
         generateQueryConstructor.call( this, ...arguments )
     }
@@ -14,11 +14,11 @@ export default class GridDraw {
         return gridcells.find( gridcell => gridcell.isInCell )
     }
     draw() {
-        const { grid, grid: { svgElement }, outCell, inCell } = this
-
+        const { outCell, inCell, grid, grid: { svgElement } } = this
         const gridPathFinding = new GridPathFinding({ grid, outCell, inCell })
+        
         this.helperPath = gridPathFinding.generateHelperPath()
-    
+
         const pathElement = svgElement.querySelector( 'path' )
         pathElement.setAttribute( 'd', this.buildPathD() )
     }
@@ -29,8 +29,9 @@ export default class GridDraw {
         const [ rowIn, colIn ] = inCell.position.split( '-' )
 
         function generateM( startPos ) {
-            return ( (startPos * cellSize) - (cellSize / 2) ) + ( startPos * borderSize * 2 )
+            return ( ( startPos * cellSize ) - ( cellSize / 2 ) ) + ( startPos * borderSize * 2 )
         }
+
         const m1 = generateM( parseInt( colOut ) + 1 )
         const m2 = generateM( parseInt( rowOut ) + 1 )
 
@@ -40,7 +41,7 @@ export default class GridDraw {
         for ( let i = 0; i < this.helperPath.length - 1; i++ ) {
             const [ col, row ] = this.helperPath[ i ]
             const [ colNext, rowNext ] = this.helperPath[ i + 1 ]
-            
+
                  if ( colNext < col ) pathD += ` h-${ distance }`
             else if ( colNext > col ) pathD += ` h${ distance }`
             else if ( rowNext < row ) pathD += ` v-${ distance }`
@@ -50,3 +51,5 @@ export default class GridDraw {
         return pathD
     }
 }
+
+export default GridDraw

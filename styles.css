@@ -1,9 +1,8 @@
 body {
-    margin: 0;
+    background: black;
+    margin: 0px;
     overflow: hidden;
-    background-color: black;
 }
-
 .gridcell {
     float: left;
 }
@@ -17,13 +16,11 @@ body {
     background-color: coral;
 }
 
-/****/
-
 svg {
     position: fixed;
     z-index: -1;
 }
-path {
+svg path {
     fill: none;
     stroke-width: 3px;
     stroke: red;

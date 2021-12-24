@@ -2,15 +2,15 @@ import { generateQueryConstructor } from '../utils/object.utils.js'
 import GridCell from './GridCell.class.js'
 import GridDraw from './GridDraw.class.js'
 
-export default class Grid {
+class Grid {
     constructor() {
         generateQueryConstructor.call( this, ...arguments )
     }
-    get svgElement() {
-        return document.querySelector( this.settings.svgSelector )
-    }
     get gridElement() {
         return document.querySelector( this.settings.gridSelector )
+    }
+    get svgElement() {
+        return document.querySelector( this.settings.svgSelector )
     }
     build() {
         this.#buildGridLayout()
@@ -22,26 +22,28 @@ export default class Grid {
         const { cellSize, borderSize, borderColor } = settings
         const { innerWidth, innerHeight } = window
 
-        const fullCellSize = cellSize + borderSize * 2 
-        
+        const fullCellSize = cellSize + borderSize * 2
+
         this.numCols = Math.floor( innerWidth / fullCellSize )
         this.numRows = Math.floor( innerHeight / fullCellSize )
-        
+
         this.gridWidth = this.numCols * fullCellSize
-        this.gridMarginX = ( innerWidth - this.gridWidth - borderSize * 2 ) / 2
-        
         this.gridHeight = this.numRows * fullCellSize
-        this.gridMarginY = ( innerHeight - this.gridHeight - borderSize * 2  ) / 2
         
+        this.gridMarginX = ( innerWidth - this.gridWidth - borderSize * 2 ) / 2
+        this.gridMarginY = ( innerHeight - this.gridHeight - borderSize * 2  ) / 2
+
         Object.assign( gridElement.style, {
             width: `${ this.gridWidth }px`,
             height: `${ this.gridHeight }px`,
             
             marginLeft: `${ this.gridMarginX }px`,
             marginTop: `${ this.gridMarginY }px`,
+
             border: `${ borderSize }px solid ${ borderColor }`
         })
     }
+
     #buildGridCells() {
         const { numRows, numCols } = this
         this.gridcells = {}
@@ -52,21 +54,21 @@ export default class Grid {
                 const gridcell = new GridCell({ grid: this, row, col })
                 gridcell.render()
 
-                this.gridcells[ gridcell.position ] = gridcell 
+                this.gridcells[ gridcell.position ] = gridcell
             }
         }
     }
     #buildGridSvg() {
-        const { svgElement, gridWidth, gridHeight } = this
+        const { svgElement, gridWidth, gridHeight, gridMarginX, gridMarginY } = this
         
         Object.assign( svgElement.style, {
-            width: gridWidth,
-            height: gridHeight,
-            left: `${ this.gridMarginX }px`,
-            top: `${ this.gridMarginY }px`,
+            width: `${ gridWidth }px`,
+            height: `${ gridHeight }px`,
+            left: `${ gridMarginX }px`,
+            top: `${ gridMarginY }px`,
         })
 
-        svgElement.setAttribute( 'viewbox', `0 0 ${ gridWidth } ${ gridHeight }`)
+        svgElement.setAttribute( 'viewbox', `0 0 ${ gridWidth } ${ gridHeight }` )
     }
 
     draw() {
@@ -74,3 +76,5 @@ export default class Grid {
         gridDraw.draw()
     }
 }
+
+export default Grid
